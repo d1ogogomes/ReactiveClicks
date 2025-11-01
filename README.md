@@ -37,7 +37,7 @@ A clean and animated start screen where players can choose between different gam
 
 ### CPS Test
 Test how fast you can click in 10 seconds — smooth animations, particle feedback, and score tracking.
-![CPS Test](./src/lib/assets/screenshots/cps-test.png)
+![CPS Test](./src/lib/assets/screenshots/cps-tester.png)
 
 ### Aim Trainer
 Click on the targets as quickly and accurately as possible — you have only 1 second before they disappear. Miss 5, and it’s game over.  
