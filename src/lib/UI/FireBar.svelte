@@ -1,5 +1,4 @@
 <script>
-  /** intensity: número de 0 a 100 */
   export let intensity = 0;
 </script>
 

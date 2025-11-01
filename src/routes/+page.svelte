@@ -240,7 +240,7 @@
   .neon-btn.green { color: #2ecc71; }
   .neon-btn.green:hover { color: #27ae60; }
 
-  /* Spark ao clicar */
+  /* Spark */
   .spark {
     position: absolute;
     width: 6px;
