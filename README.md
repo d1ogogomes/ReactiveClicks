@@ -1,26 +1,31 @@
-# 🚀 Reactive Clicks
+# Reactive Clicks
 
 **Reactive Clicks** is a fast-paced browser game built with **SvelteKit** and **Vite**.  
-It features two mini-games — a **CPS (Clicks Per Second) Test** and an **Aim Trainer** — both with smooth animations, responsive design, and dynamic effects.
+It features **three** high-energy mini-games — **CPS Test**, **Aim Trainer**, and **F1 Reaction Timer** — all powered by smooth animations, neon visuals, and instant feedback.
 
 ---
 
-## 🧩 Features
+## Features
 
-- ⚡ Built with **SvelteKit + Vite**  
-- 🎯 **Aim Trainer Mode** – Hit moving asteroids before they vanish (5 misses = game over)  
-- 🖱️ **CPS Test Mode** – Measure your click speed over 10 seconds  
-- 💥 Particle and light effects for instant feedback  
-- 🌈 Animated gradient backgrounds  
-- 📱 Fully responsive layout  
+- **Three adrenaline-pumping games** in one app  
+- **CPS Test** – Click as fast as possible in 10 seconds  
+- **Aim Trainer** – Hit moving targets before they disappear (5 misses = game over)  
+- **F1 Reaction Timer** – React the moment the lights go out, just like an F1 start  
+- Explosive particle effects on hits  
+- Dynamic neon glows and animated borders  
+- Real-time intensity-based background transitions  
+- Fully responsive – works on desktop and mobile  
+- Sci-fi UI with **Orbitron** font and cyberpunk vibes  
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
-| Technology | Purpose |
-|-------------|----------|
-| **SvelteKit** | Frontend framework |
-| **Vite** | Dev & build tool |
-| **JavaScript / HTML / CSS** | Core languages |
-| **Orbitron Font** | Sci-fi UI styling |
+| Technology     | Purpose                     |
+|----------------|-----------------------------|
+| **SvelteKit**  | Frontend framework & routing |
+| **Vite**       | Lightning-fast dev server & build |
+| **Svelte**     | Reactive UI components      |
+| **JavaScript** | Game logic & interactivity  |
+| **CSS**        | Animations, gradients, effects |
+| **Orbitron**   | Futuristic typography       |
