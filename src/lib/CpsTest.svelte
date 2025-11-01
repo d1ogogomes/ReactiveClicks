@@ -37,7 +37,7 @@
     }, 100);
   }
 
-  function clickBtn() {
+  function handleClick() {
     if (!timerRunning) return;
     count += 1;
     intensity += 5;
@@ -45,7 +45,24 @@
   }
 </script>
 
+<svelte:window on:click={handleClick} />
+
 <main>
+  <!-- Background particles -->
+  <div class="background-particles">
+    {#each Array(80) as _, i}
+      <div class="particle"
+        style="
+          top:{Math.random()*100}%;
+          left:{Math.random()*100}%;
+          width:{1 + Math.random()*2}px;
+          height:{1 + Math.random()*2}px;
+          animation-duration:{5 + Math.random()*10}s;
+        ">
+      </div>
+    {/each}
+  </div>
+
   <h1>CPS Test</h1>
 
   <div class="hud">
@@ -72,17 +89,18 @@
     <button on:click={start} class="start-btn">Start</button>
   {/if}
 
-  <button class="click-btn" on:click={clickBtn} disabled={!timerRunning}>
-    🔥 Click Me!
-  </button>
-
   <FireBar {intensity} />
 
-  <button class="back-btn" on:click={() => dispatch("back")}>← Back to Menu</button>
+  <button class="back-btn" on:click={() => dispatch("back")}>← BACK</button>
 </main>
 
 <style>
-:global(body) { margin: 0; overflow: hidden; background: #111; font-family: 'Orbitron', sans-serif; color: white; }
+:global(body) {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Orbitron', sans-serif;
+  color: white;
+}
 
 main {
   display: flex;
@@ -92,15 +110,40 @@ main {
   height: 100vh;
   gap: 2rem;
   text-align: center;
+  cursor: crosshair;
+  position: relative;
   background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
   background-size: 400% 400%;
   animation: gradientShift 20s ease infinite;
 }
 
+/* Background gradient animation */
 @keyframes gradientShift {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+  0% { background-position:0% 50%; }
+  50% { background-position:100% 50%; }
+  100% { background-position:0% 50%; }
+}
+
+/* Floating particle dots behind everything */
+.background-particles {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events: none;
+  z-index:0;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  animation: floatParticle linear infinite;
+}
+@keyframes floatParticle {
+  0% { transform: translateY(0) translateX(0);}
+  50% { transform: translateY(-10px) translateX(5px);}
+  100% { transform: translateY(0) translateX(0);}
 }
 
 h1 {
@@ -108,6 +151,7 @@ h1 {
   text-transform: uppercase;
   color: #f39c12;
   text-shadow: 0 0 15px #f39c12, 0 0 30px #f39c12;
+  z-index: 10;
 }
 
 .hud {
@@ -146,23 +190,6 @@ h1 {
   text-shadow: 0 0 15px #e74c3c;
 }
 
-.click-btn {
-  width: 200px;
-  height: 200px;
-  font-size: 1.8rem;
-  border-radius: 50%;
-  background: linear-gradient(45deg, #e74c3c, #f39c12);
-  color: white;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 0 25px #f39c12, 0 0 40px rgba(231,76,60,0.5);
-  transition: transform 0.1s ease, box-shadow 0.1s ease;
-}
-.click-btn:active {
-  transform: scale(0.9);
-  box-shadow: 0 0 50px #f1c40f, 0 0 70px rgba(231,76,60,0.5);
-}
-
 .start-btn {
   padding: 1rem 2rem;
   font-size: 1.6rem;
@@ -173,6 +200,7 @@ h1 {
   cursor: pointer;
   box-shadow: 0 5px 15px rgba(231,76,60,0.6);
   transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  z-index: 10;
 }
 .start-btn:hover {
   transform: scale(1.1);
@@ -188,20 +216,15 @@ h1 {
   font-size: 1.8rem;
   margin-bottom: 1rem;
   text-shadow: 0 0 10px #f39c12;
+  z-index: 10;
 }
 
-.back-btn {
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  border: none;
-  background: #e67e22;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  transition: 0.2s;
+.back-btn { 
+  position: absolute; top: 20px; left: 20px; padding: 0.8rem 1.6rem; 
+  background: rgba(0,0,0,0.6); color: white; border: 1px solid #e74c3c; 
+  border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; z-index: 100; 
 }
-.back-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 15px #f39c12;
+.back-btn:hover { 
+  background: #e74c3c; transform: translateY(-3px); box-shadow: 0 0 20px #e74c3c; 
 }
 </style>

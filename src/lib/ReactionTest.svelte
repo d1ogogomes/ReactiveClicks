@@ -27,7 +27,7 @@
     function lightNext() {
       if (index < 5) {
         lights[index] = true;
-        lights = [...lights]; // trigger Svelte update
+        lights = [...lights];
         beepSound.currentTime = 0;
         beepSound.play().catch(() => {});
         index++;
@@ -92,6 +92,21 @@
 </script>
 
 <main class:jumpstart={jumpstart}>
+  <!-- Background particles -->
+  <div class="background-particles">
+    {#each Array(80) as _, i}
+      <div class="particle"
+        style="
+          top:{Math.random()*100}%;
+          left:{Math.random()*100}%;
+          width:{1 + Math.random()*2}px;
+          height:{1 + Math.random()*2}px;
+          animation-duration:{5 + Math.random()*10}s;
+        ">
+      </div>
+    {/each}
+  </div>
+
   <div class="container">
     <h1>F1 Start Timer</h1>
 
@@ -120,7 +135,7 @@
     </p>
 
     <button class="back-btn" on:click={() => dispatch("back")}>
-      ← Back to Menu
+      ← BACK
     </button>
   </div>
 </main>
@@ -132,6 +147,7 @@
   font-family: 'Orbitron', sans-serif;
 }
 
+/* Main gradient background with animation */
 main {
   width: 100%;
   height: 100vh;
@@ -144,7 +160,7 @@ main {
   color: white;
   text-align: center;
   cursor: pointer;
-  transition: background 0.3s;
+  position: relative;
 }
 
 main.jumpstart {
@@ -157,11 +173,35 @@ main.jumpstart {
   100%{background-position:0% 50%;}
 }
 
+/* Background particles */
+.background-particles {
+  position: absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  pointer-events: none;
+  z-index:0;
+}
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  animation: floatParticle linear infinite;
+}
+@keyframes floatParticle {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(-10px) translateX(5px); }
+  100% { transform: translateY(0) translateX(0); }
+}
+
+/* Container and text */
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1.5rem;
+  z-index: 10;
 }
 
 h1 {
@@ -205,19 +245,13 @@ h1 {
   text-shadow: 0 0 15px #2ecc71;
 }
 
-button.back-btn {
-  padding: 0.8rem 1.5rem;
-  border-radius: 12px;
-  border: none;
-  background: linear-gradient(45deg, #e67e22, #f39c12);
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
-  box-shadow: 0 0 15px #f39c12, 0 0 25px #e67e22;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+.back-btn { 
+  position: absolute; top: 20px; left: 20px; padding: 0.8rem 1.6rem; 
+  background: rgba(0,0,0,0.6); color: white; border: 1px solid #e74c3c; 
+  border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; z-index: 100; 
 }
-button.back-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px #f39c12, 0 0 40px #e67e22;
+.back-btn:hover { 
+  background: #e74c3c; transform: translateY(-3px); box-shadow: 0 0 20px #e74c3c; 
 }
+
 </style>

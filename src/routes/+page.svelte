@@ -78,7 +78,7 @@
       <button on:click={() => goTo('reaction')} class="neon-btn green"><span>F1 REACTION</span><div class="spark"></div></button>
     </div>
 
-    <p class="tagline">Train like a pro. Click like a god.</p>
+    <p class="tagline">Click like a god</p>
   </main>
 {/if}
 
@@ -193,7 +193,7 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
-  
+
   .neon-btn::before {
     content: '';
     position: absolute;
