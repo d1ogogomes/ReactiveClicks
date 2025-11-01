@@ -1,38 +1,76 @@
-# sv
+🚀 Reactive Clicks
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Reactive Clicks is a fast-paced browser game built with SvelteKit and Vite.
+It includes two dynamic mini-games — a CPS (Clicks Per Second) test and an Aim Trainer — each featuring responsive design, particle effects, and smooth animations.
 
-## Creating a project
+🧩 Features
 
-If you're seeing this, you've probably already done this step. Congrats!
+⚡ Built with SvelteKit & Vite for fast development and instant hot reloads.
 
-```sh
-# create a new project in the current directory
-npx sv create
+🎯 Aim Trainer Mode – Click on moving asteroid targets before they disappear. Miss 5 times, and it’s game over.
 
-# create a new project in my-app
-npx sv create my-app
-```
+🖱️ CPS Test Mode – Measure how fast you can click in 10 seconds.
 
-## Developing
+🌈 Animated Gradient Backgrounds and dynamic lighting effects.
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+💥 Particle Explosions for interactive feedback.
 
-```sh
+📱 Fully Responsive – Play seamlessly on desktop or mobile.
+
+🛠️ Tech Stack
+Technology	Purpose
+SvelteKit
+	Frontend framework
+Vite
+	Development & build tooling
+JavaScript / HTML / CSS
+	Core languages
+Orbitron Font
+	Sci-fi themed typography
+🧠 Project Structure
+src/
+ ├─ lib/
+ │   ├─ components/
+ │   │   ├─ CPSTest.svelte
+ │   │   ├─ AimTrainer.svelte
+ │   │   └─ UI/
+ │   │       └─ FireBar.svelte
+ │   └─ app.html
+ ├─ routes/
+ │   ├─ +layout.svelte
+ │   └─ +page.svelte
+ └─ app.css
+
+
+CPSTest.svelte → Handles the Clicks Per Second test logic and UI
+
+AimTrainer.svelte → Game loop for the asteroid-style aim trainer
+
+FireBar.svelte → Visual intensity indicator based on player performance
+
+🧪 Development Setup
+1. Install Dependencies
+npm install
+
+2. Start the Development Server
 npm run dev
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
 
-## Building
+Then visit http://localhost:5173
+ in your browser.
 
-To create a production version of your app:
-
-```sh
+3. Build for Production
 npm run build
-```
 
-You can preview the production build with `npm run preview`.
+4. Preview Production Build
+npm run preview
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+🚧 Future Improvements
+
+🪐 Additional game modes and difficulty scaling
+
+🔊 Sound design improvements and ambient effects
+
+🧩 High-score tracking (local storage or backend integration)
+
+🎨 Customizable themes
