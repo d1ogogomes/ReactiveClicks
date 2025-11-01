@@ -120,93 +120,104 @@
     </p>
 
     <button class="back-btn" on:click={() => dispatch("back")}>
-      Back to Menu
+      ← Back to Menu
     </button>
   </div>
 </main>
 
 <style>
-  main {
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(135deg, #1f1c2c, #928dab);
-    font-family: 'Orbitron', 'Arial', sans-serif;
-    color: white;
-    text-align: center;
-    user-select: none;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
+:global(body) {
+  margin: 0;
+  overflow: hidden;
+  font-family: 'Orbitron', sans-serif;
+}
 
-  main.jumpstart {
-    background: linear-gradient(135deg, #4b0000, #ff0000);
-  }
+main {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
 
-  .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+main.jumpstart {
+  background: linear-gradient(135deg, #4b0000, #ff0000);
+}
 
-  h1 {
-    font-size: 2.8rem;
-    font-weight: 900;
-    color: #e74c3c;
-    text-shadow: 0 0 20px #e74c3c, 0 0 40px #e74c3c;
-    margin-bottom: 1rem;
-  }
+@keyframes gradientShift {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
 
-  .instruction {
-    font-size: 1.2rem;
-    color: #ccc;
-    margin-bottom: 2rem;
-  }
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
 
-  .lights {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
+h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #f39c12;
+  text-shadow: 0 0 20px #f39c12, 0 0 40px #e74c3c;
+}
 
-  .light {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    background: rgba(255,0,0,0.2);
-    border: 3px solid #400;
-    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
-    transition: all 0.3s ease;
-  }
+.instruction {
+  font-size: 1.3rem;
+  color: #ccc;
+  text-shadow: 0 0 5px #000;
+}
 
-  .light.on {
-    background: #e74c3c;
-    box-shadow: 0 0 20px #e74c3c, 0 0 40px #e74c3c, 0 0 60px #e74c3c;
-    border-color: #f00;
-  }
+.lights {
+  display: flex;
+  gap: 1rem;
+}
 
-  .best {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #2ecc71;
-    text-shadow: 0 0 10px #2ecc71;
-    margin-bottom: 1rem;
-  }
+.light {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: rgba(255,0,0,0.2);
+  border: 3px solid #400;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+  transition: all 0.3s ease, transform 0.2s ease;
+}
+.light.on {
+  background: #e74c3c;
+  border-color: #f00;
+  box-shadow: 0 0 25px #e74c3c, 0 0 50px #e74c3c, 0 0 80px #f39c12;
+  transform: scale(1.1);
+}
 
-  button.back-btn {
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    border: none;
-    background: #e67e22;
-    color: white;
-    cursor: pointer;
-    font-weight: bold;
-    transition: 0.2s;
-  }
+.best {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #2ecc71;
+  text-shadow: 0 0 15px #2ecc71;
+}
 
-  button.back-btn:hover {
-    background: #f39c12;
-  }
+button.back-btn {
+  padding: 0.8rem 1.5rem;
+  border-radius: 12px;
+  border: none;
+  background: linear-gradient(45deg, #e67e22, #f39c12);
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 0 15px #f39c12, 0 0 25px #e67e22;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+button.back-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #f39c12, 0 0 40px #e67e22;
+}
 </style>

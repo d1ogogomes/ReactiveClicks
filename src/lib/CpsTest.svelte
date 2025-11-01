@@ -49,15 +49,15 @@
   <h1>CPS Test</h1>
 
   <div class="hud">
-    <div class="hud-item">
+    <div class="stat">
       <span class="label">Time</span>
       <span class="value">{timeLeft.toFixed(1)}s</span>
     </div>
-    <div class="hud-item">
+    <div class="stat">
       <span class="label">Clicks</span>
       <span class="value">{count}</span>
     </div>
-    <div class="hud-item">
+    <div class="stat">
       <span class="label">CPS</span>
       <span class="value">{timerRunning ? currentCPS : cps}</span>
     </div>
@@ -72,109 +72,125 @@
     <button on:click={start} class="start-btn">Start</button>
   {/if}
 
-  <button on:click={clickBtn} disabled={!timerRunning} class="click-btn">
+  <button class="click-btn" on:click={clickBtn} disabled={!timerRunning}>
     🔥 Click Me!
   </button>
 
   <FireBar {intensity} />
 
-  <button class="back-btn" on:click={() => dispatch("back")}>Back to Menu</button>
+  <button class="back-btn" on:click={() => dispatch("back")}>← Back to Menu</button>
 </main>
 
 <style>
+:global(body) { margin: 0; overflow: hidden; background: #111; font-family: 'Orbitron', sans-serif; color: white; }
+
 main {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  gap: 1.5rem;
-  font-family: 'Arial', sans-serif;
+  gap: 2rem;
   text-align: center;
-  background: linear-gradient(135deg, #1f1c2c, #928dab);
-  color: white;
-  user-select: none;
+  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+  background-size: 400% 400%;
+  animation: gradientShift 20s ease infinite;
+}
+
+@keyframes gradientShift {
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
 h1 {
   font-size: 3rem;
   text-transform: uppercase;
   color: #f39c12;
-  text-shadow: 0 0 10px #f39c12, 0 0 20px #f39c12;
+  text-shadow: 0 0 15px #f39c12, 0 0 30px #f39c12;
 }
 
 .hud {
   display: flex;
   gap: 2rem;
-  font-size: 1.3rem;
-  margin-bottom: 1rem;
+  z-index: 10;
 }
 
-.hud-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.stat {
+  background: rgba(0,0,0,0.6);
+  padding: 1rem 1.8rem;
+  border-radius: 15px;
+  border: 2px solid #e67e22;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  min-width: 120px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #f39c12;
 }
 
 .label {
-  font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.9rem;
   color: #f1c40f;
   text-shadow: 0 0 5px #f1c40f;
+  display: block;
+  font-weight: bold;
 }
 
 .value {
-  font-size: 1.5rem;
-  font-weight: bold;
+  font-size: 2rem;
+  font-weight: 900;
   color: #e74c3c;
-  text-shadow: 0 0 10px #e74c3c;
-}
-
-.start-btn {
-  padding: 1rem 2rem;
-  font-size: 1.5rem;
-  border-radius: 12px;
-  background: linear-gradient(45deg, #e74c3c, #e67e22);
-  color: white;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(231, 76, 60, 0.6);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
-}
-.start-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 20px rgba(231, 76, 60, 0.8);
-  background: linear-gradient(45deg, #f1c40f, #e74c3c);
-}
-.start-btn:active {
-  transform: scale(0.95);
-  box-shadow: 0 3px 10px rgba(231, 76, 60, 0.6);
+  text-shadow: 0 0 15px #e74c3c;
 }
 
 .click-btn {
-  width: 180px;
-  height: 180px;
+  width: 200px;
+  height: 200px;
+  font-size: 1.8rem;
   border-radius: 50%;
-  font-size: 1.5rem;
-  background: linear-gradient(45deg, #e74c3c, #e67e22);
+  background: linear-gradient(45deg, #e74c3c, #f39c12);
   color: white;
   border: none;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(231,76,60,0.8);
+  box-shadow: 0 0 25px #f39c12, 0 0 40px rgba(231,76,60,0.5);
   transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 .click-btn:active {
   transform: scale(0.9);
-  box-shadow: 0 0 40px #f1c40f;
+  box-shadow: 0 0 50px #f1c40f, 0 0 70px rgba(231,76,60,0.5);
+}
+
+.start-btn {
+  padding: 1rem 2rem;
+  font-size: 1.6rem;
+  border-radius: 12px;
+  background: linear-gradient(45deg, #f39c12, #e74c3c);
+  border: none;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(231,76,60,0.6);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+}
+.start-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(231,76,60,0.8);
+  background: linear-gradient(45deg, #f1c40f, #e74c3c);
+}
+.start-btn:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 12px rgba(231,76,60,0.6);
 }
 
 .result p {
   font-size: 1.8rem;
   margin-bottom: 1rem;
+  text-shadow: 0 0 10px #f39c12;
 }
 
-button.back-btn {
-  margin-top: 1rem;
+.back-btn {
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
   border: none;
@@ -184,7 +200,8 @@ button.back-btn {
   font-weight: bold;
   transition: 0.2s;
 }
-button.back-btn:hover {
+.back-btn:hover {
   transform: scale(1.05);
+  box-shadow: 0 0 15px #f39c12;
 }
 </style>
