@@ -16,14 +16,14 @@
   let animationFrame;
   let bgIntensity = 0;
 
-  // 🎵 Sons arcade leves (pequenos bips em base64)
-  const hitSound = new Audio(
-    "data:audio/wav;base64,UklGRoQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YVQAAAB/////AAD///8AAP///wAA//8AAAD//wAA//8AAP///wAA//8AAP///wAA"
-  );
+    // Sounds
+    const hitSound = new Audio(
+      'data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBQAAAP//AAAAP/7k'
+    );
 
-  const missSound = new Audio(
-    "data:audio/wav;base64,UklGRqIAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YVoAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA="
-  );
+    const missSound = new Audio(
+      "data:audio/wav;base64,UklGRp4AAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YZ4AAAA8/wD//wAAAP8A//8AAP8A/wAA//8AAP8A//8AAP8A//8AAP8A//8AAP8AAP8AAP8AAP8A"
+    );
 
   function randomPosition() {
     x = Math.random() * 70 + 15;
