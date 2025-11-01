@@ -9,6 +9,7 @@
   let startTime = 0;
   let reactionTime = 0;
   let bestTime = Number(localStorage.getItem('f1-best')) || Infinity;
+  let jumpstart = false;
   let timeoutId;
 
   const beepSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBQAAAP//AAAAP/7k');
@@ -19,6 +20,7 @@
     phase = 'lighting';
     canClick = false;
     reactionTime = 0;
+    jumpstart = false;
     lights = [false, false, false, false, false];
     let index = 0;
 
@@ -53,7 +55,8 @@
     if (!canClick) {
       if (phase === 'lighting') {
         phase = 'done';
-        reactionTime = -1; // clicked too early
+        jumpstart = true; // clicked too early
+        reactionTime = -1;
         setTimeout(reset, 1500);
       }
       return;
@@ -62,6 +65,7 @@
     reactionTime = performance.now() - startTime;
     canClick = false;
     phase = 'done';
+    jumpstart = false;
 
     if (reactionTime < bestTime) {
       bestTime = reactionTime;
@@ -73,6 +77,7 @@
 
   function reset() {
     phase = 'idle';
+    jumpstart = false;
     clearTimeout(timeoutId);
   }
 
@@ -86,7 +91,7 @@
   });
 </script>
 
-<main>
+<main class:jumpstart={jumpstart}>
   <div class="container">
     <h1>F1 Start Timer</h1>
 
@@ -97,8 +102,8 @@
         Get ready...
       {:else if phase === 'ready'}
         GO!
-      {:else if reactionTime === -1}
-        Too early!
+      {:else if jumpstart}
+        Jump Start! Too early!
       {:else}
         {reactionTime.toFixed(0)} ms
       {/if}
@@ -133,6 +138,11 @@
     text-align: center;
     user-select: none;
     cursor: pointer;
+    transition: background 0.3s;
+  }
+
+  main.jumpstart {
+    background: linear-gradient(135deg, #4b0000, #ff0000);
   }
 
   .container {

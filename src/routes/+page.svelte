@@ -183,6 +183,7 @@
     overflow: hidden;
     transition: all 0.3s ease;
     transform-style: preserve-3d;
+    background: rgba(0, 0, 0, 0.3);
   }
 
   .neon-btn span {
@@ -192,10 +193,76 @@
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  
+  .neon-btn::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    border-radius: 15px;
+    padding: 0;
+    background: transparent;
+    transition: padding 0.4s ease, box-shadow 0.4s ease;
+    z-index: 1;
+  }
 
-  .neon-btn.red::before { background: linear-gradient(45deg, #e74c3c, #c0392b); }
-  .neon-btn.yellow::before { background: linear-gradient(45deg, #f39c12, #e67e22); }
-  .neon-btn.green::before { background: linear-gradient(45deg, #2ecc71, #27ae60); }
+  .neon-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%;
+    width: 0; height: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .neon-btn:hover::before {
+    padding: 4px;
+    box-shadow: 
+      0 0 20px currentColor,
+      0 0 40px currentColor,
+      inset 0 0 20px rgba(255,255,255,0.1);
+  }
+
+  .neon-btn:hover::after {
+    width: 300px;
+    height: 300px;
+  }
+
+  .neon-btn.red { color: #e74c3c; }
+  .neon-btn.red:hover { color: #ff6b6b; }
+
+  .neon-btn.yellow { color: #f39c12; }
+  .neon-btn.yellow:hover { color: #f1c40f; }
+
+  .neon-btn.green { color: #2ecc71; }
+  .neon-btn.green:hover { color: #27ae60; }
+
+  /* Spark ao clicar */
+  .spark {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background: white;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 3;
+  }
+
+  .neon-btn:active .spark {
+    animation: spark 0.6s ease-out;
+  }
+
+  @keyframes spark {
+    0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(20); opacity: 0; }
+  }
 
   .tagline {
     margin-top: 3rem;
