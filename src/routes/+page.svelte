@@ -27,7 +27,7 @@
     animationFrame = requestAnimationFrame(updateParticles);
   }
 
-  // Gerar partículas flutuantes
+  // Generate particles
   onMount(() => {
     const interval = setInterval(() => {
       const newParticle = {
