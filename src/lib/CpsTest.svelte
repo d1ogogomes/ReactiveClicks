@@ -48,7 +48,7 @@
 <svelte:window on:click={handleClick} />
 
 <main>
-  <!-- Background particles -->
+  <!-- Subtle animated background -->
   <div class="background-particles">
     {#each Array(80) as _, i}
       <div class="particle"
@@ -83,10 +83,10 @@
   {#if !timerRunning && cps > 0}
     <div class="result">
       <p>Your CPS: {cps}</p>
-      <button on:click={start} class="start-btn">Try Again</button>
+      <button on:click={start} class="start-btn">TRY AGAIN</button>
     </div>
   {:else if !timerRunning}
-    <button on:click={start} class="start-btn">Start</button>
+    <button on:click={start} class="start-btn">START</button>
   {/if}
 
   <FireBar {intensity} />
@@ -117,27 +117,25 @@ main {
   animation: gradientShift 20s ease infinite;
 }
 
-/* Background gradient animation */
+/* Gradient background animation */
 @keyframes gradientShift {
   0% { background-position:0% 50%; }
   50% { background-position:100% 50%; }
   100% { background-position:0% 50%; }
 }
 
-/* Floating particle dots behind everything */
+/* Floating background particles */
 .background-particles {
   position: absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  pointer-events: none;
+  top:0; left:0;
+  width:100%; height:100%;
+  pointer-events:none;
   z-index:0;
 }
 .particle {
   position: absolute;
   border-radius: 50%;
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.08);
   animation: floatParticle linear infinite;
 }
 @keyframes floatParticle {
@@ -146,6 +144,7 @@ main {
   100% { transform: translateY(0) translateX(0);}
 }
 
+/* Title */
 h1 {
   font-size: 3rem;
   text-transform: uppercase;
@@ -154,6 +153,7 @@ h1 {
   z-index: 10;
 }
 
+/* Stats HUD */
 .hud {
   display: flex;
   gap: 2rem;
@@ -190,28 +190,33 @@ h1 {
   text-shadow: 0 0 15px #e74c3c;
 }
 
+/* Unified red-glow START button */
 .start-btn {
-  padding: 1rem 2rem;
-  font-size: 1.6rem;
+  padding: 1rem 2.5rem;
+  font-size: 1.4rem;
   border-radius: 12px;
-  background: linear-gradient(45deg, #f39c12, #e74c3c);
-  border: none;
+  background: rgba(0,0,0,0.6);
+  border: 2px solid #e74c3c;
   color: white;
   cursor: pointer;
-  box-shadow: 0 5px 15px rgba(231,76,60,0.6);
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.3s ease;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 0 15px rgba(231,76,60,0.5);
+  transition: all 0.3s ease;
   z-index: 10;
 }
 .start-btn:hover {
-  transform: scale(1.1);
-  box-shadow: 0 8px 25px rgba(231,76,60,0.8);
-  background: linear-gradient(45deg, #f1c40f, #e74c3c);
+  background: #e74c3c;
+  transform: translateY(-3px);
+  box-shadow: 0 0 25px #e74c3c;
 }
 .start-btn:active {
-  transform: scale(0.95);
-  box-shadow: 0 3px 12px rgba(231,76,60,0.6);
+  transform: scale(0.96);
+  box-shadow: 0 0 10px #e74c3c;
 }
 
+/* Result text */
 .result p {
   font-size: 1.8rem;
   margin-bottom: 1rem;
@@ -220,11 +225,22 @@ h1 {
 }
 
 .back-btn { 
-  position: absolute; top: 20px; left: 20px; padding: 0.8rem 1.6rem; 
-  background: rgba(0,0,0,0.6); color: white; border: 1px solid #e74c3c; 
-  border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; z-index: 100; 
+  position: absolute; 
+  top: 20px; 
+  left: 20px; 
+  padding: 0.8rem 1.6rem; 
+  background: rgba(0,0,0,0.6); 
+  color: white; 
+  border: 1px solid #e74c3c; 
+  border-radius: 10px; 
+  font-weight: bold; 
+  cursor: pointer; 
+  transition: all 0.3s ease; 
+  z-index: 100; 
 }
 .back-btn:hover { 
-  background: #e74c3c; transform: translateY(-3px); box-shadow: 0 0 20px #e74c3c; 
+  background: #e74c3c; 
+  transform: translateY(-3px); 
+  box-shadow: 0 0 20px #e74c3c; 
 }
 </style>

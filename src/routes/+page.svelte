@@ -78,7 +78,7 @@
       <button on:click={() => goTo('reaction')} class="neon-btn green"><span>F1 REACTION</span><div class="spark"></div></button>
     </div>
 
-    <p class="tagline">Click like a god</p>
+    <p class="tagline">Click like a pro</p>
   </main>
 {/if}
 
