@@ -1,7 +1,6 @@
 <script>
   import { createEventDispatcher, onMount, onDestroy } from "svelte";
-  import { fly, fade } from 'svelte/transition';
-  import { quintOut } from 'svelte/easing';
+  import { fade } from 'svelte/transition';
 
   const dispatch = createEventDispatcher();
 
@@ -11,14 +10,20 @@
   let y = 50;
   let timeLeft = 1;
   let interval;
-  const targetSize = 80; // maior para facilitar clique
+  const targetSize = 80;
 
   let particles = [];
   let animationFrame;
   let bgIntensity = 0;
 
-  const hitSound = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQAAAAA=');
-  const missSound = new Audio('data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEAIlYAAESsAAACABAAZGF0YQAAAAA=');
+  // 🎵 Sons arcade leves (pequenos bips em base64)
+  const hitSound = new Audio(
+    "data:audio/wav;base64,UklGRoQAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YVQAAAB/////AAD///8AAP///wAA//8AAAD//wAA//8AAP///wAA//8AAP///wAA"
+  );
+
+  const missSound = new Audio(
+    "data:audio/wav;base64,UklGRqIAAABXQVZFZm10IBAAAAABAAEAESsAACJWAAACABAAZGF0YVoAAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA="
+  );
 
   function randomPosition() {
     x = Math.random() * 70 + 15;
@@ -109,13 +114,12 @@
     cancelAnimationFrame(animationFrame);
   });
 
- $: bgColor = `linear-gradient(
+  $: bgColor = `linear-gradient(
     135deg,
     rgb(${20 + bgIntensity * 0.5}, ${20 + bgIntensity * 0.5}, ${40 + bgIntensity * 1.5}),
     rgb(${30 + bgIntensity * 0.5}, ${10 + bgIntensity * 0.5}, ${60 + bgIntensity * 1.2}),
     rgb(${40 + bgIntensity * 0.2}, ${0 + bgIntensity * 0.1}, ${80 + bgIntensity * 1.0})
   )`;
-
 </script>
 
 <svelte:window on:resize={() => particles = []} />
@@ -148,7 +152,6 @@
     </div>
   </div>
 
-  <!-- TARGET: tamanho fixo -->
   <div
     class="target"
     on:click={hit}
@@ -163,7 +166,7 @@
     <div class="timebar" style="width: {timeLeft * 100}%"></div>
   </div>
 
-  <button class="back-btn" on:click={() => dispatch("back")}>← BACK</button>
+  <button class="back-btn" on:click={() => dispatch('back')}>← BACK</button>
 </main>
 
 <style>
@@ -173,51 +176,25 @@
   position: relative;
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   font-family: 'Orbitron', sans-serif;
   color: white;
   cursor: crosshair;
   overflow: hidden;
+  transition: background 0.4s ease;
   background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
   background-size: 400% 400%;
   animation: gradientShift 15s ease infinite;
-  transition: background 0.4s ease;
 }
 
-/* Background gradient animation */
 @keyframes gradientShift {
   0%{background-position:0% 50%;}
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
 
-/* Floating particle dots behind everything */
-.background-particles {
-  position: absolute;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  pointer-events: none;
-  z-index:0;
-}
-.particle {
-  position: absolute;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.1);
-  width: 2px;
-  height: 2px;
-  animation: floatParticle linear infinite;
-}
-@keyframes floatParticle {
-  0% { transform: translateY(0) translateX(0);}
-  50% { transform: translateY(-10px) translateX(5px);}
-  100% { transform: translateY(0) translateX(0);}
-}
-
-/* HUD */
 .hud {
   position: absolute;
   top: 5%;
@@ -228,14 +205,13 @@
   z-index: 100;
 }
 .stat { background: rgba(0,0,0,0.5); padding: 0.8rem 1.8rem; border-radius: 15px; border: 2px solid; min-width: 120px; text-align: center; backdrop-filter: blur(10px); }
-.score { border-color: #f1c40f; }
+.score { border-color: #f39c12; }
 .lifes { border-color: #e74c3c; }
 .label { display: block; font-size: 0.8rem; letter-spacing: 0.1em; color: #aaa; text-transform: uppercase; }
 .value { display: block; font-size: 2rem; font-weight: 900; text-shadow: 0 0 15px currentColor; }
-.score .value { color: #f1c40f; }
+.score .value { color: #f39c12; }
 .lifes .value { color: #e74c3c; }
 
-/* Target */
 .target { position: absolute; border-radius: 50%; cursor: pointer; z-index: 10; filter: drop-shadow(0 0 20px #e74c3c); }
 .core { position: absolute; top: 50%; left: 50%; width: 30%; height: 30%; background: #fff; border-radius: 50%; transform: translate(-50%, -50%); box-shadow: 0 0 30px #fff, inset 0 0 15px #e74c3c; }
 .ring { position: absolute; top: 0; left: 0; right: 0; bottom: 0; border: 4px solid #e74c3c; border-radius: 50%; animation: rotate 2s linear infinite; }
@@ -243,15 +219,12 @@
 @keyframes rotate { to { transform: rotate(360deg); } }
 @keyframes pulse { 0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; } 100% { transform: translate(-50%, -50%) scale(1.5); opacity: 0; } }
 
-/* Timebar */
 .timebar-container { position: absolute; bottom: 40px; width: 70%; max-width: 600px; height: 16px; background: rgba(0,0,0,0.5); border-radius: 8px; overflow: hidden; border: 1px solid rgba(255,255,255,0.2); z-index: 50; }
 .timebar { height: 100%; background: linear-gradient(90deg, #f1c40f, #e74c3c); border-radius: 8px; transition: width 0.05s linear; }
 
-/* Back button */
 .back-btn { position: absolute; top: 20px; left: 20px; padding: 0.8rem 1.6rem; background: rgba(0,0,0,0.6); color: white; border: 1px solid #e74c3c; border-radius: 10px; font-weight: bold; cursor: pointer; transition: all 0.3s ease; z-index: 100; }
 .back-btn:hover { background: #e74c3c; transform: translateY(-3px); box-shadow: 0 0 20px #e74c3c; }
 
-/* Particle explosions */
 .explosion { position: absolute; border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%); }
 
 @media (max-width: 600px) {
@@ -263,7 +236,6 @@
 }
 </style>
 
-<!-- Floating particles behind the target -->
 {#each Array(80) as _, i}
   <div class="particle" style="top:{Math.random()*100}%; left:{Math.random()*100}%; animation-duration:{5 + Math.random()*10}s; width:{1 + Math.random()*2}px; height:{1 + Math.random()*2}px;"></div>
 {/each}
