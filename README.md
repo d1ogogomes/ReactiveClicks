@@ -33,16 +33,16 @@ It features **three** high-energy mini-games - **CPS Test**, **Aim Trainer**, an
 
 ### Main Menu
 A clean and animated start screen where players can choose between different game modes.
-![Main Menu](./assets/screenshots/main-menu.png)
+![Main Menu](./src/lib/assets/screenshots/main-menu.png)
 
 ### CPS Test
 Test how fast you can click in 10 seconds — smooth animations, particle feedback, and score tracking.
-![CPS Test](./assets/screenshots/cps-test.png)
+![CPS Test](./src/lib/assets/screenshots/cps-test.png)
 
 ### Aim Trainer
 Click on the targets as quickly and accurately as possible — you have only 1 second before they disappear. Miss 5, and it’s game over.  
-![Aim Trainer](./assets/screenshots/aim-trainer.png)
+![Aim Trainer](./src/lib/assets/screenshots/aim-trainer.png)
 
 ### Reaction Timer
 Inspired by F1 lights — wait for the lights to turn off, then click as fast as you can!
-![Reaction Timer](./assets/screenshots/reaction-timer.png)
+![Reaction Timer](./src/lib/assets/screenshots/reaction-timer.png)
