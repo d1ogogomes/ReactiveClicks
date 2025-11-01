@@ -94,10 +94,9 @@
       "
     ></div>
   {/each}
-
-  <!-- Fixed back button -->
-  <button class="back-btn" on:click={() => dispatch('back')}>
-    BACK
+  
+  <button class="back-btn" on:click={() => dispatch("back")}>
+    ← BACK
   </button>
 
   <!-- Title -->
@@ -105,7 +104,7 @@
     <h1>CPS<span>TEST</span></h1>
   </div>
 
-  <!-- HUD (always visible) -->
+  <!-- HUD -->
   <div class="hud">
     <div class="stat">
       <span class="label">Time</span>
@@ -121,7 +120,7 @@
     </div>
   </div>
 
-  <!-- Main button (stays fixed) -->
+  <!-- Main button -->
   <div class="button-wrapper">
     <button 
       on:click={clickBtn} 
@@ -310,7 +309,6 @@
     box-shadow: 0 0 10px #666;
   }
 
-  /* RESULT */
   .result {
     margin-top: 1rem;
   }
