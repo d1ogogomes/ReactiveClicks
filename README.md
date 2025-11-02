@@ -51,7 +51,7 @@ Inspired by F1 lights — wait for the lights to turn off, then click as fast as
 
 ## About Svelte
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+Everything you need to build a Svelte project.
 
 ### Creating a project
 
