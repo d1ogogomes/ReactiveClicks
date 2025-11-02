@@ -51,8 +51,9 @@ Inspired by F1 lights — wait for the lights to turn off, then click as fast as
 
 ## How to Run
 
-### 1. Clone the repository
 ```bash
+1. Clone the repository
+
 git clone https://github.com/d1ogogomes/reactiveclicks.git
 cd reactiveclicks
 
