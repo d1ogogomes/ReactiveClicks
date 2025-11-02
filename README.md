@@ -47,19 +47,21 @@ Click on the targets as quickly and accurately as possible — you have only 1 s
 Inspired by F1 lights — wait for the lights to turn off, then click as fast as you can!
 ![Reaction Timer](./src/lib/assets/screenshots/reaction-timer.png)
 
-## How to run
+---
 
-### Clone the repository
+## How to Run
+
+### 1. Clone the repository
+```bash
 git clone https://github.com/d1ogogomes/reactiveclicks.git
 cd reactiveclicks
 
-### Install dependencies
-npm install
+2. Install dependencies
+bashnpm install
 
-### Start the development server
-npm run dev
+3. Start the development server
+bashnpm run dev
 
-### (Optional) Build for production
-npm run build && npm run preview
-
-
+4. (Optional) Build for production
+bashnpm run build
+npm run preview
